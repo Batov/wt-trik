@@ -22,6 +22,7 @@ ONLY if you have problems with boost-random copy files to sdk
 	cd wt-trik/boost_random
 	cp libboost_random* /opt/trik-sdk/sysroots/armv5te-oe-linux-gnueabi/usr/lib/
 
+Make lib and examples
 
 	make
 	make -C examples

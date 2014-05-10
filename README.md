@@ -1,3 +1,6 @@
+About wt: http://www.webtoolkit.eu/wt
+Widget gallery: http://www.webtoolkit.eu/widgets
+
 Crosscompile wt-projects for TRIK:
 
 	wget -c http://kent.dl.sourceforge.net/sourceforge/witty/wt-3.3.2.tar.gz

@@ -18,8 +18,10 @@ cmake .. -DSHARED_LIBS=OFF -DBOOST_PREFIX=/opt/trik-sdk/sysroots/armv5te-oe-linu
 
 The SHARED_LIBS=OFF option makes the Wt libraries static. This is not required, but easier for deployment: you can simply copy the example executables to your trik without having to worry about the shared libraries.
 
-ONLY if you have problems with boost-random copy files to sdk 
+ONLY if you have problems with boost-random copy files to sdk
+ 
 	cd wt-trik/boost_random
+
 	cp libboost_random* /opt/trik-sdk/sysroots/armv5te-oe-linux-gnueabi/usr/lib/
 
 make

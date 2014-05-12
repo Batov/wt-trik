@@ -27,7 +27,7 @@ Make lib and examples
 	make
 	make -C examples
 
-Copy *.wt file to your trik. And then start it!
+Copy *.wt file to your trik. And then start it with your IP and port!
 
 	e.g.:	./*.wt --docroot . --http-address 192.168.0.114 --http-port 8080
 

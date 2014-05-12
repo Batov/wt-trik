@@ -36,6 +36,10 @@ And ONLY if you have problems with boost-random copy files to your trik with you
 	cd wt-trik/boost_random
 	scp libboost_random* root@192.168.0.114:/usr/lib
 
+And ONLY if you have problems with other boost libs
+
+	scp /opt/trik-sdk/sysroots/armv5te-oe-linux-gnueabi/usr/lib/libboost_* root@192.168.0.114:/usr/lib
+
 
 
 

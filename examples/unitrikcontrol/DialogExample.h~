@@ -26,15 +26,12 @@ public:
    */
   DialogExample(const WEnvironment& env);
 
-
-
 private:
   WMessageBox *messageBox_;
   WText *status;
   Wt::WHBoxLayout *textbox;
   
   void show();
-  void setPower();
   int p1x;
   int p1y;
   int p2x;
@@ -44,4 +41,3 @@ private:
 /*@}*/
 
 #endif // DIALOGEXAMPLE_H_
-

@@ -73,39 +73,39 @@ DialogExample::DialogExample(const WEnvironment& env)
 
   button = new WPushButton("=");
   vboxf->addWidget(button);
-  button->clicked().connect(std::bind([=]() { if (p1x>-100) p1x -= 20; if (p1y<100) p1y += 20; show(); }));
+  button->clicked().connect(std::bind([=]() { if (p1x>-100) p1x -= 20; if (p1y<100) p1y += 20; setPower(); show(); }));
 
   button = new WPushButton("Left");
   vboxf->addWidget(button);
-  button->clicked().connect(std::bind([=]() { if (p1x>-100) p1x -= 20;  show(); }));
+  button->clicked().connect(std::bind([=]() { if (p1x>-100) p1x -= 20; setPower();  show(); }));
 
   button = new WPushButton("=");
   vboxf->addWidget(button);
-  button->clicked().connect(std::bind([=]() { if (p1x>-100) p1x -= 20; if (p1y>-100) p1y -= 20; show(); }));
+  button->clicked().connect(std::bind([=]() { if (p1x>-100) p1x -= 20; if (p1y>-100) p1y -= 20; setPower(); show(); }));
 
   button = new WPushButton("Up");
   vboxs->addWidget(button);
-  button->clicked().connect(std::bind([=]() { if (p1y<100) p1y += 20; show(); }));
+  button->clicked().connect(std::bind([=]() { if (p1y<100) p1y += 20; setPower(); show(); }));
  
   button = new WPushButton("STOP");
   vboxs->addWidget(button);
-  button->clicked().connect(std::bind([=]() { p1x = 0; p1y = 0; show(); }));
+  button->clicked().connect(std::bind([=]() { p1x = 0; p1y = 0; setPower(); show(); }));
 
   button = new WPushButton("Down");
   vboxs->addWidget(button);
-  button->clicked().connect(std::bind([=]() { if (p1y>-100) p1y -= 20; show(); }));
+  button->clicked().connect(std::bind([=]() { if (p1y>-100) p1y -= 20; setPower(); show(); }));
 
   button = new WPushButton("=");
   vboxt->addWidget(button);
-  button->clicked().connect(std::bind([=]() { if (p1x<100) p1x += 20; if (p1y<100) p1y += 20; show(); }));
+  button->clicked().connect(std::bind([=]() { if (p1x<100) p1x += 20; if (p1y<100) p1y += 20; setPower(); show(); }));
   
   button = new WPushButton("Right");
   vboxt->addWidget(button);
-  button->clicked().connect(std::bind([=]() { if (p1x<100) p1x += 20;  show(); }));
+  button->clicked().connect(std::bind([=]() { if (p1x<100) p1x += 20; setPower();  show(); }));
 
   button = new WPushButton("=");
   vboxt->addWidget(button);
-  button->clicked().connect(std::bind([=]() { if (p1x<100) p1x += 20; if (p1y>-100) p1y -= 20; show(); }));
+  button->clicked().connect(std::bind([=]() { if (p1x<100) p1x += 20; if (p1y>-100) p1y -= 20; setPower(); show(); }));
 //----------------------------------
   button = new WPushButton("1");
   space->addWidget(button);
@@ -155,10 +155,10 @@ DialogExample::DialogExample(const WEnvironment& env)
   vboxt2->addWidget(button);
 
   styleSheet().addRule(".buttons",
-		       "padding: 20px;");
+           "padding: 20px;");
   styleSheet().addRule(".buttons BUTTON",
-		       "padding-left: 4px; padding-right: 4px;"
-		       "margin-top: 4px; display: block");
+           "padding-left: 4px; padding-right: 4px;"
+           "margin-top: 4px; display: block");
 
   // avoid scrollbar problems
   styleSheet().addRule(".text", "padding: 4px 8px");
@@ -173,6 +173,20 @@ void DialogExample::show()
   char buffer [50];
   sprintf (buffer, " X1 = %d | Y1 = %d || X2 = %d | Y2 = %d" , p1x, p1y, p2x, p2y);
   status->setText(buffer);
+}
+
+void DialogExample::setPower()
+{
+  int left = p1y - p1x;
+  int right = p1y + p1x;
+  char command[100] = {0};
+  sprintf(command, "i2cset -y 2 0x48 0x17 0x%x w", static_cast<unsigned char>(left));
+  system(command);
+  printf(command);
+  char command2[100] = {0};
+  sprintf(command2, "i2cset -y 2 0x48 0x15 0x%x w", static_cast<unsigned char>(right));
+  system(command2);
+  printf(command2);
 }
 
 

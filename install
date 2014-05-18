@@ -1,0 +1,45 @@
+#!/bin/bash
+
+WT_NAME=wt-3.3.2
+WT_URL=http://kent.dl.sourceforge.net/sourceforge/witty/$WT_NAME.tar.gz
+
+BUILDDIR=buildtrik
+
+SDK_PATH=/opt/trik-sdk/environment-setup-armv5te-oe-linux-gnueabi
+SDK_NAME=latest-trik-sdk.sh
+SDK_URL=http://195.19.241.150/packages/updates/sdk/$SDK_NAME
+SDK_BOOST=/opt/trik-sdk/sysroots/armv5te-oe-linux-gnueabi/usr
+
+TAR_OPTIONS=xvxf
+
+echo "$WT_URL"
+
+#---START---
+
+sudo apt-get install git cmake tar make
+
+
+if [[ ! -f $SDK_PATH ]]; then
+	echo "Downloading TRIK SDK..."
+    wget -c $SDK_URL
+    echo "Installing TRIK SDK..."
+    chmod 777 $SDK_NAME
+    sudo ./$SDK_NAME
+fi
+
+cp boost_random/libboost_random* $SDK_BOOST/lib/
+
+
+echo "Downloading Wt..."
+wget -c $WT_URL
+echo "Unpacking Wt..."
+tar $TAR_OPTIONS $WT_NAME.tar.gz
+cd $WT_NAME
+mkdir $BUILDDIR
+cd $BUILDDIR
+source $SDK_PATH
+
+cmake .. -DSHARED_LIBS=OFF -DBOOST_PREFIX=$SDK_BOOST -DWT_CPP_11_MODE=-std=c++0x -DWT_SIGNALS_IMPLEMENTATION=boost.signals2 -DENABLE_SQLITE=OFF -DENABLE_POSTGRES=OFF
+
+make $$ make -C examples
+

@@ -1,13 +1,16 @@
 <h1> WebToolKit C++ on TRIK</h1>
 
 About wt: http://www.webtoolkit.eu/wt
+
 Widget gallery: http://www.webtoolkit.eu/widgets
+
 About TRIK http://blog.trikset.com/
 
 <h1>Crosscompile wt-projects for TRIK:</h1>
 
 <h2>Auto-compile</h2>
 Just run 
+
 	bash install
 
 <h2>Manual compile</h2>

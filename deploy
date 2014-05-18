@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo "Please enter TRIK's IP-address"
+read ip
+echo "Please enter TRIK's port for web UI e.g. 8080"
+read port
+
+if ssh root@$ip ! stat /usr/lib/libboost_random.so \> /dev/null 2\>\&1
+then 
+  scp /opt/trik-sdk/sysroots/armv5te-oe-linux-gnueabi/usr/lib/libboost_* root@$ip:/usr/lib
+fi
+
+scp a.wt root@$ip:~/ # copy a.wt files to TRIK
+ssh root@$ip ./a.wt --docroot . --http-address $ip --http-port $port
+
+

@@ -28,7 +28,7 @@ About trik-sdk: https://github.com/trikset/trikRuntime/wiki/%D0%9D%D0%B0%D1%81%D
 
 	cmake .. -DSHARED_LIBS=OFF -DBOOST_PREFIX=/opt/trik-sdk/sysroots/armv5te-oe-linux-gnueabi/usr/ -DWT_CPP_11_MODE=-std=c++0x -DWT_SIGNALS_IMPLEMENTATION=boost.signals2 -DENABLE_SQLITE=OFF -DENABLE_POSTGRES=OFF
 
-The SHARED_LIBS=OFF option makes the Wt libraries static. This is not required, but easier for deployment: you can simply copy the example executables to your trik without having to worry about the shared libraries.
+The SHARED_LIBS=OFF option makes the Wt libraries static. This is not required, but easier for deployment: you can simply copy the example executables to your TRIK without having to worry about the shared libraries.
 
 ONLY if you have problems with boost-random copy files to sdk
  
@@ -40,11 +40,13 @@ Make lib and examples
 	make
 	make -C examples
 
-Copy *.wt file to your trik. And then start it with your IP and port!
+<h2>Deployment to the TRIK</h2>>	
+
+Copy *.wt file to your TRIK. And then start it with your IP and your port!
 
 	e.g.:	./*.wt --docroot . --http-address 192.168.0.114 --http-port 8080
 
-And ONLY if you have problems with boost-random copy files to your trik with your IP.
+And ONLY if you have problems with boost-random copy files to your TRIK with your IP.
 
 	cd wt-trik/boost_random
 	scp libboost_random* root@192.168.0.114:/usr/lib

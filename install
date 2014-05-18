@@ -12,34 +12,44 @@ SDK_BOOST=/opt/trik-sdk/sysroots/armv5te-oe-linux-gnueabi/usr
 
 TAR_OPTIONS=xvxf
 
-echo "$WT_URL"
-
 #---START---
 
-sudo apt-get install git cmake tar make
+sudo apt-get install git cmake tar make qt-sdk
 
-
-if [[ ! -f $SDK_PATH ]]; then
-	echo "Downloading TRIK SDK..."
-    wget -c $SDK_URL
-    echo "Installing TRIK SDK..."
-    chmod 777 $SDK_NAME
+if [ ! -f $SDK_PATH ]; then
+    echo "Downloading SDK..."
+    wget -c $SDK_URL 1>log 2>/dev/null 
+    echo "Installing SDK..."
+    chmod 777 $SDK_NAME 
     sudo ./$SDK_NAME
 fi
 
-cp boost_random/libboost_random* $SDK_BOOST/lib/
+sudo cp boost_random/libboost_random* $SDK_BOOST/lib/
 
+if [ ! -f $WT_NAME.tar.gz ]; then
+	echo "Downloading Wt..."
+	wget -c $WT_URL 1>log 2>/dev/null 
+fi
 
-echo "Downloading Wt..."
-wget -c $WT_URL
-echo "Unpacking Wt..."
-tar $TAR_OPTIONS $WT_NAME.tar.gz
+if [ ! -d $WT_NAME ]; then
+	echo "Unpacking Wt..."
+	tar $TAR_OPTIONS $WT_NAME.tar.gz > log
+fi
+
 cd $WT_NAME
-mkdir $BUILDDIR
+
+if [ ! -d $BUILDDIR ]; then
+	mkdir $BUILDDIR
+fi
+
 cd $BUILDDIR
+
 source $SDK_PATH
 
-cmake .. -DSHARED_LIBS=OFF -DBOOST_PREFIX=$SDK_BOOST -DWT_CPP_11_MODE=-std=c++0x -DWT_SIGNALS_IMPLEMENTATION=boost.signals2 -DENABLE_SQLITE=OFF -DENABLE_POSTGRES=OFF
+cmake .. -DSHARED_LIBS=OFF -DBOOST_PREFIX=$SDK_BOOST/ -DWT_CPP_11_MODE=-std=c++0x -DWT_SIGNALS_IMPLEMENTATION=boost.signals2 -DENABLE_SQLITE=OFF -DENABLE_POSTGRES=OFF  1>log 2>/dev/null 
 
-make $$ make -C examples
+echo "Installing Wt..."
+
+make
+make -C examples
 

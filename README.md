@@ -40,7 +40,14 @@ Make lib and examples
 	make
 	make -C examples
 
-<h2>Deployment to the TRIK</h2>>	
+<h2>Deployment to the TRIK</h2>
+
+<h3>Auto-deploy</h3>	
+Just run
+
+	bash deploy
+
+<h3>Manual deploy</h3>
 
 Copy *.wt file to your TRIK. And then start it with your IP and your port!
 

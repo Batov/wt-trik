@@ -1,4 +1,4 @@
-<h1> WebToolKit C++ on TRIK</h1>
+<h2> WebToolKit C++ on TRIK</h2>
 
 About wt: http://www.webtoolkit.eu/wt
 
@@ -6,14 +6,14 @@ Widget gallery: http://www.webtoolkit.eu/widgets
 
 About TRIK http://blog.trikset.com/
 
-<h1>Crosscompile wt-projects for TRIK:</h1>
+<h2>Crosscompile wt-projects for TRIK:</h2>
 
-<h2>Auto-compile</h2>
+<h3>Auto-compile</h3>
 Just run 
 
 	bash install
 
-<h2>Manual compile</h2>
+<h3>Manual compile</h3>
 
 Use this steps:
 
